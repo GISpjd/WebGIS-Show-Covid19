@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Covid_Dashboard</title>
+
+    <link rel="stylesheet" href="./style.css">
+
+    <!-- version 9.1.0 -->
+    <script src="./web_source/ol.js"></script>
+    <link rel="stylesheet" href="./web_source/ol.css">
+
+    <link rel="stylesheet" href="https://unpkg.com/ol-layerswitcher@4.1.1/dist/ol-layerswitcher.css" />
+    <script src="https://unpkg.com/ol-layerswitcher@4.1.1"></script>
+
+    <link rel="stylesheet" href="./web_source/bootstrap-5.3.3-dist/css/bootstrap.css">
+    <script src="./web_source/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+
+</head>
+
+<body>
+    <div id="header">
+        <div id="top">
+            <h5>
+                <center style="color: #003366;">COVID-19 Dashboard</center>
+            </h5>
+        </div>
+        <div id="drop">
+            <input type="date" id="start_date" name="start_date" min="2020-01-01" max="2021-07-31" value="2020-01-01">
+            <input type="date" id="end_date" name="end_date" min="2020-01-01" max="2021-07-31" value="2021-07-31">
+            <select id="parameter" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                <option selected value="cases">Confirmed Cases</option>
+                <option value="deaths">Deaths</option>
+                <option value="tests">Tests</option>
+                <option value="vaccinations">Vaccinations</option>
+            </select>
+        </div>
+        <div id="counter">
+            <button type="button" id="cases" class="btn btn-light"></button>
+            <button type="button" id="deaths" class="btn btn-danger"></button>
+            <button type="button" id="tests" class="btn btn-warning"></button>
+            <button type="button" id="vaccinations" class="btn btn-info"></button>
+        </div>
+    </div>
+
+
+
+    <div id="content">
+        <div id="map">
+            <div id="legend">
+                <div id="legend_title">Legend</div>
+                <ul class="symbols">
+                    <li class="symbol">
+                        <div id="class6" class="color-box"></div>
+                        <div id="6" class="legend_txt"></div>
+                    </li>
+                    <li class="symbol">
+                        <div id="class5" class="color-box"></div>
+                        <div id="5" class="legend_txt"></div>
+                    </li>
+                    <li class="symbol">
+                        <div id="class4" class="color-box"></div>
+                        <div id="4" class="legend_txt"></div>
+                    </li>
+                    <li class="symbol">
+                        <div id="class3" class="color-box"></div>
+                        <div id="3" class="legend_txt"></div>
+                    </li>
+                    <li class="symbol">
+                        <div id="class2" class="color-box"></div>
+                        <div id="2" class="legend_txt"></div>
+                    </li>
+                    <li class="symbol">
+                        <div id="class1" class="color-box"></div>
+                        <div id="1" class="legend_txt"></div>
+                    </li>
+                    <li class="symbol">
+                        <div id="class0" class="color-box"></div>
+                        <div id="0" class="legend_txt"></div>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div id="popup" class="ol-popup">
+            <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+            <div id="popup-content"></div>
+        </div>
+
+        <div id="graph">
+            <div id="graph1">
+                <canvas id="lineGraph"></canvas>
+            </div>
+            <div id="graph2">
+                <canvas id="barGraph"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script src="./map.js"></script>
+</body>
+
+</html>

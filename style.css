@@ -1,0 +1,253 @@
+html,
+body {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    font-family: arial;
+    position: relative;
+}
+
+select,
+input[type="date"],
+button {
+    /* 为输入和按钮添加一些内边距 */
+    padding: 5px;
+    /* 移除外边距 */
+    margin: 0;
+}
+
+#header {
+    display: flex;
+    /* 使子元素垂直排列 */
+    flex-direction: column;
+    /* 中心对齐子元素 */
+    align-items: center;
+    /* 在子元素之间添加间隙 */
+    gap: 10px;
+    /* 添加一些内边距 */
+    padding: 10px;
+    background-color: #ffffff;
+    /* 添加轻微的阴影效果 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    height: 20%;
+}
+
+#top,
+#drop,
+#counter {
+    /* 子元素宽度占满父元素 */
+    width: 100%;
+    /* 统一的边框样式和颜色 */
+    border: 1px solid #ced4da;
+    /* 轻微的圆角效果 */
+    border-radius: 5px;
+}
+
+#top {
+    background-color: #f8f9fa;
+}
+
+#drop {
+    display: flex;
+    /* 子元素水平居中 */
+    justify-content: center;
+    gap: 20px;
+    background-color: #e9ecef;
+}
+
+#parameter {
+    width: 20%;
+}
+
+#counter {
+    display: flex;
+    justify-content: space-around;
+    background-color: #dee2e6;
+}
+
+
+
+#content {
+    box-sizing: border-box;
+    /* 不太懂 */
+    margin-top: 0.5%;
+    display: flex;
+    gap: 0.5%;
+    height: 79%;
+}
+
+#map {
+    height: 100%;
+    width: 60%;
+    /* background-color: blueviolet; */
+    box-sizing: border-box;
+    border: 1px solid rgb(73, 132, 113);
+    overflow: hidden;
+    border-radius: 10px;
+
+    /* 定义legend的包含块 */
+    position: relative;
+}
+
+#legend {
+    position: absolute;
+    bottom: 10%;
+    left: 1%;
+    width: 25%;
+    height: 40%;
+    z-index: 34;
+    border: 1px solid green;
+    background-color: #FFFFFF;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+#legend_title {
+    /* position: absolute;
+    top: 1%;
+    left: 5%; */
+    margin-bottom: 2px;
+    font-weight: bold;
+    font-style: 10px;
+    color: #003366;
+}
+
+.symbols {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.symbol {
+    display: flex;
+    align-items: center;
+    margin-top: 3%;
+    gap: 5%;
+}
+
+.symbol:nth-child(1) {
+    margin-top: 0px;
+}
+
+.color-box {
+    flex-shrink: 0;
+    /* Prevent the box from shrinking */
+    width: 17%;
+    /* Width of the color box */
+    height: 20px;
+    /* Fixed height for the color box */
+    margin-right: 5px;
+    /* Space between the color box and the text */
+}
+
+.legend_txt {
+    font-size: 12px;
+}
+
+/* Individual color box styles */
+#class6 {
+    background-color: #800026;
+}
+
+#class5 {
+    background-color: #BD0026;
+}
+
+#class4 {
+    background-color: #E31A1C;
+}
+
+#class3 {
+    background-color: #FC4E2A;
+}
+
+#class2 {
+    background-color: #FD8D3C;
+}
+
+#class1 {
+    background-color: #FEB24C;
+}
+
+#class0 {
+    background-color: #FED976;
+}
+
+#graph {
+    display: flex;
+    flex-direction: column;
+    gap: 1%;
+    width: 39.5%;
+    height: 100%;
+}
+
+#graph1 {
+    width: 100%;
+    height: 49.5%;
+    /* background-color: orange; */
+    box-sizing: border-box;
+    border: 1px solid salmon;
+    border-radius: 5px;
+}
+
+#graph2 {
+    width: 100%;
+    height: 49.5%;
+    /* background-color: mediumaquamarine; */
+    box-sizing: border-box;
+    border: 1px solid salmon;
+    border-radius: 5px;
+}
+
+
+.ol-popup {
+    position: absolute;
+    background-color: white;
+    -webkit-filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.2));
+    filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.2));
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #cccccc;
+    bottom: 12px;
+    left: -50px;
+    min-width: 280px;
+}
+
+.ol-popup:after,
+.ol-popup:before {
+    top: 100%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+}
+
+.ol-popup:after {
+    border-top-color: white;
+    border-width: 10px;
+    left: 48px;
+    margin-left: -10px;
+}
+
+.ol-popup:before {
+    border-top-color: #cccccc;
+    border-width: 11px;
+    left: 48px;
+    margin-left: -11px;
+}
+
+.ol-popup-closer {
+    text-decoration: none;
+    position: absolute;
+    top: 2px;
+    right: 8px;
+}
+
+.ol-popup-closer:after {
+    content: "X";
+}
