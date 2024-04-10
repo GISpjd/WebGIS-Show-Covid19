@@ -169,7 +169,6 @@ function init() {
 
     // var url_max = `jsp_files1/max_value_spatial.jsp?date1=${startDate}&date2=${endDate}&parameter=${paramValue}`
     var url_max = `http://localhost:3000/get-maximum?parameter=${paramValue}&date1=${startDate}&date2=${endDate}`
-    // console.log(url_max);
     var url_point = `jsp_files1/geojson_layer_point_spatial.jsp?date1=${startDate}&date2=${endDate}&parameter=${paramValue}`
     // var url_point = `http://localhost:3000/geojson-centroids?parameter=${paramValue}&date1=${startDate}&date2=${endDate}`
     var url_poly = `jsp_files1/geojson_layer_spatial.jsp?date1=${startDate}&date2=${endDate}&parameter=${paramValue}`
@@ -331,10 +330,9 @@ function init() {
         let date = []
         let count = []
         for (let i in data) {
-            console.log(data[i]);
+            // console.log(data[i]);
             date.push(data[i].date)
             count.push(data[i][paramValue])
-            // console.log(data[i][paramValue]);
         }
 
         let ctx_line = document.getElementById('lineGraph')
