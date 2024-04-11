@@ -516,6 +516,7 @@ function click_info(event) {
 }
 
 
+// 点击相应地区之后图表变化逻辑
 function click_graph(event) {
     if (lineGraph) {
         lineGraph.destroy()
@@ -525,9 +526,9 @@ function click_graph(event) {
     }
     if (selectedFeature) {
         var country_name = selectedFeature.get('country_name')
-        paramValue = parameter.options[parameter.selectedIndex].value
-        startDate = document.getElementById("start_date").value
-        endDate = document.getElementById("end_date").value
+        // paramValue = parameter.options[parameter.selectedIndex].value
+        // startDate = document.getElementById("start_date").value
+        // endDate = document.getElementById("end_date").value
 
         // var url_cum_graph = `jsp_files1/graph_country_cumulative.jsp?parameter=${paramValue}&date1=${startDate}&date2=${endDate}&country=${country_name}`
         var url_cum_graph = `http://localhost:3000/cumulative-by-country?parameter=${paramValue}&date1=${startDate}&date2=${endDate}&country=${country_name}`

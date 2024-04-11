@@ -31,8 +31,8 @@ app.get('/get-maximum', async (req, res) => {
                    ) z`,
             values: [date1, date2],
         };
-        const result = await pool.query(query)
-        res.json({ maximum: result.rows })
+        const { rows } = await pool.query(query)
+        res.json({ maximum: rows })
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server error');
@@ -65,7 +65,7 @@ app.get('/daily-by-world', async (req, res) => {
     }
 });
 
-// 根据日期的累加
+// 根据日期的累加(但显示的范围是由传入的参数决定)
 app.get('/cumulative-by-world', async (req, res) => {
     try {
         const { parameter, date1, date2 } = req.query;
@@ -87,12 +87,10 @@ app.get('/cumulative-by-world', async (req, res) => {
     }
 });
 
+// 获取规定日期范围对应城市每日的cases/deaths/vaccinations/texts
 app.get('/daily-by-country', async (req, res) => {
     try {
         const { parameter, date1, date2, country } = req.query;
-
-        // 构建SQL查询字符串。注意安全性！
-        // 确保动态参数（如列名）的值来自受信任的源，以避免SQL注入。
         const queryText = `
         SELECT daily_${parameter} AS "${parameter}", date
         FROM world_covid_data
@@ -112,12 +110,10 @@ app.get('/daily-by-country', async (req, res) => {
 });
 
 
+// 获取规定日期范围对应城市每日的累计cases/deaths/vaccinations/texts
 app.get('/cumulative-by-country', async (req, res) => {
     try {
         const { parameter, date1, date2, country } = req.query;
-
-        // 构建SQL查询字符串。重要：直接使用来自请求的parameter作为列名时要小心，
-        // 这可能会导致SQL注入风险。请确保参数值来自受信任的源或进行适当的过滤。
         const queryText = `
         SELECT total_${parameter} AS "${parameter}", date
         FROM world_covid_data
@@ -136,12 +132,11 @@ app.get('/cumulative-by-country', async (req, res) => {
     }
 });
 
+
+// 查询特定时间段内，按国家分组的某个参数的总和，并与国家的几何形状结合
 app.get('/geojson-data', async (req, res) => {
     try {
         const { parameter, date1, date2 } = req.query;
-
-        // 构建SQL查询字符串，注意安全性。
-        // 直接使用字符串拼接构造SQL语句时，确保动态参数的值来自受信任的源，以防止SQL注入。
         const queryText = `
         SELECT selected.${parameter}, selected.country_name, ST_AsGeoJSON(ST_Simplify(countries.geom, 0.0007)) AS geometry
         FROM countries 
@@ -177,12 +172,10 @@ app.get('/geojson-data', async (req, res) => {
 });
 
 
+// 查询在特定日期范围内，各个国家对于某个参数（比如确诊人数、死亡人数等）的累计值，并获取这些国家地理中心点的GeoJSON表示
 app.get('/geojson-centroids', async (req, res) => {
     try {
         const { parameter, date1, date2 } = req.query;
-
-        // 构建SQL查询字符串。这里直接使用字符串拼接来包含动态字段名，
-        // 这要求非常小心以防止SQL注入。在实践中，应该验证parameter是否在允许的列表中。
         const queryText = `
         SELECT selected.${parameter}, selected.country_name, ST_AsGeoJSON(ST_Centroid(countries.geom)) AS geometry
         FROM countries 
@@ -218,11 +211,10 @@ app.get('/geojson-centroids', async (req, res) => {
 });
 
 
+// 查询在某个时间范围，全球对应某个参数的累计值
 app.get('/covid-summary', async (req, res) => {
     try {
         const { date1, date2 } = req.query;
-
-        // 构建安全的SQL查询，使用参数化查询以防止SQL注入
         const queryText = `
         SELECT SUM(daily_cases) as cases, SUM(daily_deaths) as deaths, 
                SUM(daily_vaccinations) as vaccinations, SUM(daily_tests) as tests 
